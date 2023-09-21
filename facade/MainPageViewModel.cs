@@ -13,7 +13,7 @@ namespace facade
 		[ObservableProperty]
 		private string currentGuess;
 
-		public ObservableCollection<string> Guesses { get; set; }
+		public ObservableCollection<ColorGuess> Guesses { get; set; }
 
 		//public string SecretColor { get; set; }
 
@@ -21,7 +21,13 @@ namespace facade
 		{
 			secretColor = "FACADE";
 			currentGuess = "";
-		}
+
+			Guesses = new ObservableCollection<ColorGuess>();
+
+			Guesses.Add( new ColorGuess("#beaded")  );
+            Guesses.Add( new ColorGuess("#efaced") );
+
+        }
 
 
 		[RelayCommand]
@@ -33,7 +39,8 @@ namespace facade
 			}
 		}
 
-		void Guess()
+        [RelayCommand]
+        void Guess()
 		{
 			// if correct, then go to game over (DidWin=true)
 
@@ -42,7 +49,7 @@ namespace facade
 
 
 			// Add this guess to the Guesses
-			Guesses.Add(CurrentGuess);
+			Guesses.Add( new ColorGuess( CurrentGuess ) );
 
 		}
 
